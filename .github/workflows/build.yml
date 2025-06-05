@@ -1,0 +1,23 @@
+name: Build PowerToys
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Install NuGet
+      uses: NuGet/setup-nuget@v1
+
+    - name: Restore dependencies
+      run: nuget restore PowerToys.sln
+
+    - name: Build PowerToys
+      run: msbuild PowerToys.sln /t:Build /p:Configuration=Debug /p:Platform=x64
