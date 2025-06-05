@@ -9,15 +9,24 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        submodules: recursive  # ✅ Automatically run: git submodule update --init --recursive
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.3.1
 
-    - name: Install NuGet
+    - name: Setup NuGet
       uses: NuGet/setup-nuget@v1
 
-    - name: Restore dependencies
+    - name: Restore NuGet packages
       run: nuget restore PowerToys.sln
 
-    - name: Build PowerToys
-      run: msbuild PowerToys.sln /t:Build /p:Configuration=Debug /p:Platform=x64
+    - name: Build PowerToys (Release x64)
+      run: msbuild PowerToys.sln /t:Build /p:Configuration=Release /p:Platform=x64
+
+    - name: Upload PowerToys Binaries
+      uses: actions/upload-artifact@v4
+      with:
+        name: PowerToys-x64-Release
+        path: |
+          x64\Release\
