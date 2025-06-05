@@ -1,4 +1,4 @@
-name: Build PowerToys
+name: Build Microsoft.CmdPal.UI
 
 on: [push, pull_request]
 
@@ -10,7 +10,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
-        submodules: recursive  # ✅ Automatically run: git submodule update --init --recursive
+        submodules: recursive
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.3.1
@@ -21,12 +21,11 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore PowerToys.sln
 
-    - name: Build PowerToys (Release x64)
-      run: msbuild PowerToys.sln /t:Build /p:Configuration=Release /p:Platform=x64
+    - name: Build Microsoft.CmdPal.UI project
+      run: msbuild src\modules\CmdPal\Microsoft.CmdPal.UI\Microsoft.CmdPal.UI.csproj /p:Configuration=Release /p:Platform=x64
 
-    - name: Upload PowerToys Binaries
+    - name: Upload CmdPal Binaries
       uses: actions/upload-artifact@v4
       with:
-        name: PowerToys-x64-Release
-        path: |
-          x64\Release\
+        name: CmdPal-UI-Binaries
+        path: '**/Microsoft.CmdPal.UI/bin/x64/Release/**'
