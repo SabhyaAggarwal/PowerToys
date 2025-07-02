@@ -98,7 +98,7 @@
                     <TextBlock
                         IsTextSelectionEnabled="True"
                         Text="{x:Bind Key, Mode=OneWay}"
-                        TextWrapping="Wrap" />
+                        TextWrapping="WrapWholeWords" />
                     <ItemsControl
                         ItemTemplate="{StaticResource CommandTemplate}"
                         ItemsSource="{x:Bind Commands, Mode=OneWay}"
@@ -116,7 +116,7 @@
                             FontWeight="SemiBold"
                             IsTextSelectionEnabled="True"
                             Text="{x:Bind Key, Mode=OneWay}"
-                            TextWrapping="Wrap" />
+                            TextWrapping="WrapWholeWords" />
                     </Border>
                 </StackPanel>
             </DataTemplate>
@@ -125,7 +125,7 @@
                     <TextBlock
                         IsTextSelectionEnabled="True"
                         Text="{x:Bind Key, Mode=OneWay}"
-                        TextWrapping="Wrap" />
+                        TextWrapping="WrapWholeWords" />
                     <ItemsControl
                         ItemTemplate="{StaticResource TagTemplate}"
                         ItemsSource="{x:Bind Tags, Mode=OneWay}"
@@ -405,7 +405,7 @@
                             FontWeight="SemiBold"
                             Text="{x:Bind ViewModel.Details.Title, Mode=OneWay}"
                             TextAlignment="Center"
-                            TextWrapping="Wrap"
+                            TextWrapping="WrapWholeWords"
                             Visibility="{x:Bind ViewModel.Details.Title, Converter={StaticResource StringNotEmptyToVisibilityConverter}, Mode=OneWay}" />
 
                         <toolkit:MarkdownTextBlock
